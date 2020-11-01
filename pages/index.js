@@ -38,7 +38,7 @@ export default function Home({ verbs = [] }) {
           Irregular Verbs
         </h1>
         {hasSpeech && (
-          <p>Touch the words to listen</p>
+          <p>Touch the words to hear</p>
         )}
       </header>
 

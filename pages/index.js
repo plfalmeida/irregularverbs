@@ -52,7 +52,7 @@ export default function Home({ verbs = [] }) {
                 {
                   groupVerbs.map(({ verb, sp, pp }) => (
                     <li key={verb}>
-                      <p onClick={() => talk(verb)}><strong>{verb}</strong></p>
+                      <p onClick={() => talk(verb)} lang="en-US"><strong>{verb}</strong></p>
                       <p onClick={() => talk(sp)}>Simple Past: {sp}</p>
                       <p onClick={() => talk(pp)}>Past Participle: {pp}</p>
                       <p><a href={`https://www.onelook.com/?loc=pub&w=${verb}`} target="_blank">definitions</a></p>

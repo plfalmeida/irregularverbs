@@ -67,7 +67,7 @@ export default function Home({ verbs = [] }) {
 }
 
 export const getStaticProps = async () => {
-  const response = await fetch('/api/verbs');
+  const response = await fetch('http://localhost:3000/api/verbs');
   const verbs = await response.json();
   return {
     props: { verbs }

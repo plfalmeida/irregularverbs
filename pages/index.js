@@ -8,17 +8,21 @@ import { useEffect, useState } from 'react';
 export default function Home({ verbs = [] }) {
   const router = useRouter();
   const [hasSpeech, setHasSpeech] = useState(false)
+  const [synth, setSynth] = useState(null)
 
   const talk = (text) => {
-    const synth = window.speechSynthesis;
     let utter = new SpeechSynthesisUtterance(text);
     utter.lang = 'en-US';
-    synth.speak(utter);
+    if (synth) {
+
+      synth.speak(utter);
+    }
   }
 
   useEffect(() => {
     if (window) {
-      setHasSpeech(!!window.speechSynthesis)
+      setHasSpeech(!!window.speechSynthesis);
+      setSynth(window.speechSynthesis);
     }
   }, [])
 

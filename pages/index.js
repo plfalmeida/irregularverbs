@@ -1,12 +1,14 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import verbsData from '../data/verbs';
 
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react';
 
 export default function Home({ verbs = [] }) {
   const router = useRouter();
-
-  const hasSpeech = !!window.speechSynthesis;
+  const [hasSpeech, setHasSpeech] = useState(false)
+  // let hasSpeech = false;
 
   const talk = (text) => {
     const synth = window.speechSynthesis;
@@ -14,6 +16,10 @@ export default function Home({ verbs = [] }) {
     utter.lang = 'en-US';
     synth.speak(utter);
   }
+
+  useEffect(() => {
+    setHasSpeech(!!window.speechSynthesis)
+  }, [])
 
   return (
     <div className={styles.container}>
@@ -67,8 +73,7 @@ export default function Home({ verbs = [] }) {
 }
 
 export const getStaticProps = async () => {
-  const response = await fetch('http://localhost:3000/api/verbs');
-  const verbs = await response.json();
+  const verbs = verbsData;
   return {
     props: { verbs }
   }

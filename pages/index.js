@@ -4,6 +4,12 @@ import verbsData from '../data/verbs';
 
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react';
+import { FiVolume2 } from 'react-icons/fi';
+
+
+const Word = ({text, ...props}) =>{
+  return <button className='word-button' lang="en-US" {...props}>{text} <FiVolume2 /></button>
+}
 
 export default function Home({ verbs = [] }) {
   const router = useRouter();
@@ -17,6 +23,10 @@ export default function Home({ verbs = [] }) {
 
       synth.speak(utter);
     }
+  }
+
+  const breakWords = (words) => {
+    return words.split(' / ')
   }
 
   useEffect(() => {
@@ -50,11 +60,11 @@ export default function Home({ verbs = [] }) {
               <ul>
 
                 {
-                  groupVerbs.map(({ verb, sp, pp }) => (
+                  groupVerbs.map(({ verb, sp, pp }, vIndex) => (
                     <li key={verb}>
-                      <p onClick={() => talk(verb)} lang="en-US"><strong>{verb}</strong></p>
-                      <p onClick={() => talk(sp)}>Simple Past: {sp}</p>
-                      <p onClick={() => talk(pp)}>Past Participle: {pp}</p>
+                      <p onClick={() => talk(verb)} lang="en-US"><strong className="verb">{verb} <FiVolume2 /></strong></p>
+                      <p>Simple Past: {breakWords(sp).map((word, wIndex)=>(<Word key={`${vIndex}-${wIndex}-${word}`} text={word} onClick={() => talk(word)} />))}</p>
+                      <p>Past Participle: {breakWords(pp).map((word, wIndex)=>(<Word key={`${vIndex}-${wIndex}-${word}`} text={word} onClick={() => talk(word)} />))}</p>
                       <p><a href={`https://www.onelook.com/?loc=pub&w=${verb}`} target="_blank">definitions</a></p>
                     </li>
                   ))

@@ -18,3 +18,23 @@ a {
 li + li {
   margin-top: 3rem;
 }
+
+.verb {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.word-button {
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  line-height: 2;
+  border-radius: 8px;
+  margin: 0 0.5rem;
+}
+
+.verb svg,
+.word-button svg {
+  margin-left: 0.2rem;
+}
